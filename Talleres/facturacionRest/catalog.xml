@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://3.230.55.215/facturacion-war/PersonaWS?wsdl" uri="src/conf/xml-resources/web-service-references/PersonaWS/wsdl/3.230.55.215/facturacion-war/PersonaWS.wsdl"/>
+    <system systemId="http://3.230.55.215:80/facturacion-war/PersonaWS?xsd=1" uri="src/conf/xml-resources/web-service-references/PersonaWS/wsdl/3.230.55.215_80/facturacion-war/PersonaWS.xsd_1.xsd"/>
+</catalog>

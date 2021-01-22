@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="0.9.2" last-position="132,60" last-zoom="0.9" max-obj-count="4"
+	 default-schema="public" default-owner="postgres">
+<database name="new_database" is-template="false" allow-conns="true">
+</database>
+
+<schema name="public" layer="0" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<table name="Client" layer="0" collapse-mode="2" max-obj-count="12">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="120" y="100"/>
+	<column name="id" not-null="true"
+	 identity-type="ALWAYS" start="1" increment="1">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="identification">
+		<type name="varchar" length="10"/>
+	</column>
+	<column name="name">
+		<type name="varchar" length="128"/>
+	</column>
+	<column name="surname">
+		<type name="varchar" length="128"/>
+	</column>
+	<column name="birthdate">
+		<type name="date" length="0"/>
+	</column>
+	<column name="genre">
+		<type name="varchar" length="1"/>
+	</column>
+	<column name="birthProvince">
+		<type name="varchar" length="128"/>
+	</column>
+	<column name="birthCanton">
+		<type name="varchar" length="128"/>
+	</column>
+	<column name="balanceAccount">
+		<type name="numeric" length="14" precision="2"/>
+	</column>
+	<column name="balanceLoan">
+		<type name="numeric" length="14" precision="2"/>
+	</column>
+	<constraint name="client_pk" type="pk-constr" table="public.&quot;Client&quot;">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="Product" layer="0" collapse-mode="2" max-obj-count="12">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="900" y="140"/>
+	<column name="id" not-null="true"
+	 identity-type="ALWAYS" start="1" increment="1">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="name">
+		<type name="varchar" length="128"/>
+	</column>
+	<column name="type">
+		<type name="varchar" length="1"/>
+	</column>
+	<column name="description">
+		<type name="varchar" length="256"/>
+	</column>
+	<column name="quantity">
+		<type name="numeric" length="14" precision="2"/>
+	</column>
+	<column name="interest">
+		<type name="numeric" length="14" precision="2"/>
+	</column>
+	<column name="status">
+		<type name="varchar" length="1"/>
+		<comment><![CDATA[in definition, active, expired]]></comment>
+	</column>
+	<column name="startDate">
+		<type name="date" length="0"/>
+	</column>
+	<column name="endDate">
+		<type name="smallint" length="0"/>
+	</column>
+	<constraint name="product_pk" type="pk-constr" table="public.&quot;Product&quot;">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="Campaign" layer="0" collapse-mode="2" max-obj-count="3">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="460" y="160"/>
+	<column name="id" not-null="true"
+	 identity-type="ALWAYS" start="1" increment="1">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="name">
+		<type name="varchar" length="128"/>
+	</column>
+	<column name="description">
+		<type name="varchar" length="256"/>
+	</column>
+	<constraint name="campaign_pk" type="pk-constr" table="public.&quot;Campaign&quot;">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="Product_has_one_Campaign" type="rel11" layer="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#4da53d"
+	 src-table="public.&quot;Campaign&quot;"
+	 dst-table="public.&quot;Product&quot;"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="6.72461" y="-57.7825"/>
+	</label>
+</relationship>
+
+<table name="ContactabilityRegistration" layer="0" collapse-mode="2" max-obj-count="4">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="280" y="440"/>
+	<column name="id" not-null="true"
+	 identity-type="ALWAYS">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="answer">
+		<type name="boolean" length="1"/>
+	</column>
+	<constraint name="ClientCampaign_pk" type="pk-constr" table="public.&quot;ContactabilityRegistration&quot;">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="id_Campaign" index="2"/>
+		<object name="id_Client" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="Campaign_fk" index="2"/>
+		<object name="Client_fk" index="1"/>
+	</customidxs>
+</table>
+
+<relationship name="Client_has_many_ClientCampaign" type="rel1n" layer="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#7bd13e"
+	 src-table="public.&quot;Client&quot;"
+	 dst-table="public.&quot;ContactabilityRegistration&quot;"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="-61.4308" y="-18.5029"/>
+	</label>
+</relationship>
+
+<relationship name="Campaign_has_many_ClientCampaign" type="rel1n" layer="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#9c82d1"
+	 src-table="public.&quot;Campaign&quot;"
+	 dst-table="public.&quot;ContactabilityRegistration&quot;"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="95.6035" y="-27.0029"/>
+	</label>
+</relationship>
+
+</dbmodel>
